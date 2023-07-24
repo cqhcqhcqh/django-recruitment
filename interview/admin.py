@@ -10,6 +10,16 @@ logger.info("custom logger")
 # logger.info("%s exported %s candidate records" (request.user, len(queryset)))
 
 class CandidateAdmin(admin.ModelAdmin):
+    # 定义搜索字段
+    search_fields = ('user_name', 'city', 'phone', 'email', 'bachelor_school')
+
+    # 定义过滤字段（枚举）
+    list_filter = ('city', 'first_result', 'second_result', 'hr_result', 'first_interviewer', 'second_interviewer', 'hr_interviewer')
+
+    # 定义默认排序规则
+    # 先用 hr_result 排序，再 second_result，最后 first_result
+    ordering = ('hr_result', 'second_result', 'first_result')
+
     exclude = ('creator', 'created_date', 'modified_date')
 
     list_display = ('user_name', 'city','bachelor_school',
