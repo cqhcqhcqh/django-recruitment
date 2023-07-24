@@ -3,7 +3,7 @@ from interview.models import Candidate
 # Register your models here.
 
 class CandidateAdmin(admin.ModelAdmin):
-    exclude = ('creator', 'created_date', 'modified_date', 'last_editor')
+    exclude = ('creator', 'created_date', 'modified_date')
 
     list_display = ('user_name', 'city','bachelor_school',
                     'first_result', 'first_interviewer',
