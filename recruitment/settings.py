@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -118,6 +118,67 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# 简单的日志 dictConfig
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#         },
+#     }
+# }
+
+# 完善的日志 dictConfig
+LOGGING = {
+    # 日志的版本
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': { # exactformat is not important, this is the minimum information
+            'format': '%(asctime)s %(name)-12s %(lineno)d %(levelname)-8s %(message)s'
+        },
+    },
+
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+
+        'mail_admins': { # Add Handler for mail_admin for `warning` and above
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+
+        'file': {
+            # 'level': 'INFO'
+            'class': 'logging.FileHandler',
+            'formatter': 'simple',
+            # 日志文件 recruitment.admin.log 会和 recruitment 项目在同一个目录（. .. recruitment.admin.log recruitment）
+            # BASE_DIR 是项目 `recruitment` 目录的父目录（parent）
+            'filename': os.path.join(os.path.dirname(BASE_DIR), 'recruitment.admin.log')
+        },
+    },
+
+    # 是一个系统全局级别默认的日志记录器
+    # 属于 loggers 里面一种特殊的记录器
+    # 统一的日志记录
+    # 自定义日志的输出 `logger.getLogger(__name__)`
+    # 也会王这个`特殊的记录器`中定义的所有输出（控制台/文件)中输出日志
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
+    },
+
+    'loggers': {
+        'django_pythons_ldap': {
+            'handlers': ['console', 'file'],
+            'level': "DEBUG",
+        }
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

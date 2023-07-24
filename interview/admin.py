@@ -1,6 +1,13 @@
+import logging
+
 from django.contrib import admin
 from interview.models import Candidate
 # Register your models here.
+
+# __name__ 就是当前模块（interview) 当前运行的脚本的名字（admin）
+logger = logging.getLogger(__name__)
+logger.info("custom logger")
+# logger.info("%s exported %s candidate records" (request.user, len(queryset)))
 
 class CandidateAdmin(admin.ModelAdmin):
     exclude = ('creator', 'created_date', 'modified_date')
