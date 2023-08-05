@@ -1,15 +1,21 @@
 import csv
+import logging
 from datetime import datetime
 from django.http import HttpResponse
+
+# __name__ 就是当前模块（interview) 当前运行的脚本的名字（admin）
+logger = logging.getLogger(__name__)
 
 exportable_fields = ('user_name', 'city', 'phone', 'bachelor_school', 'degree', 'first_result',
                      'first_interviewer', 'second_result', 'second_interviewer',
                      'hr_result', 'hr_level', 'hr_remark', 'hr_interviewer')
 
 def export_model_as_csv(modeladmin, request, queryset):
+    logger.info("%s exported %s candidate records" %(request.user, len(queryset)))
+
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=recuritment-candidate-list-%s.csv' %(
-        datetime.now().strftime('%Y%M%D%H%M%S'),
+        datetime.now().strftime('%Y-%m-%d-%H-%M-%S'),
     )
     field_list = exportable_fields
 

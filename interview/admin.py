@@ -1,15 +1,9 @@
-import logging
 from django.contrib import admin
 from interview.models import Candidate
 from interview.export_csv import export_model_as_csv
 # Register your models here.
 
 export_model_as_csv.short_description = u'导出为csv文件'
-
-# __name__ 就是当前模块（interview) 当前运行的脚本的名字（admin）
-logger = logging.getLogger(__name__)
-logger.info("custom logger")
-# logger.info("%s exported %s candidate records" (request.user, len(queryset)))
 
 class CandidateAdmin(admin.ModelAdmin):
     # 定义搜索字段
