@@ -3,9 +3,9 @@ import logging
 from datetime import datetime
 from django.http import HttpResponse
 
-# __name__ 就是当前模块（interview) 当前运行的脚本的名字（admin）
+# __name__ 就是当前模块（interview) 当前运行的脚本的名字（export_csv）
 logger = logging.getLogger(__name__)
-
+logger.info(__name__) # interview.export_csv
 exportable_fields = ('user_name', 'city', 'phone', 'bachelor_school', 'degree', 'first_result',
                      'first_interviewer', 'second_result', 'second_interviewer',
                      'hr_result', 'hr_level', 'hr_remark', 'hr_interviewer')
