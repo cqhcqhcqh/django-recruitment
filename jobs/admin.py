@@ -12,7 +12,7 @@ class JobAdmin(admin.ModelAdmin):
     # 而 created_date 和 modified_date 是有默认值的
     # 保存一个模型到数据库之前，做一个操作
     def save_model(self, request, obj, form, change):
-        obj.user = request.user
+        obj.creator = request.user
         super().save_model(request, obj, form, change)
 
 admin.site.register(Job, JobAdmin)
