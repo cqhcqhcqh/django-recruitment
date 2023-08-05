@@ -13,7 +13,12 @@ def export_model_as_csv(modeladmin, request, queryset):
     )
     field_list = exportable_fields
 
-    # 直接把 csv 文件的内容写入到 response 中
+    # 根据类文件对象来创建一个 writer
+    # 操作 writer 对象来进行 writerrow 写入行
+    # 来影响类文件对象的存储内容
+    # HTTPResponse 对象就是一个类文件对象
+    # writer 对象来 writerow 实则改变的是 HTTPResponse 对象的
+    # 存储内容
     writer = csv.writer(response)
     # 写入表头
     # `queryset.model._meta.get_field(f)`可以获取一个 ofield_object 对象
