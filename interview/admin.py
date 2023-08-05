@@ -1,8 +1,10 @@
 import logging
-
 from django.contrib import admin
 from interview.models import Candidate
+from interview.export_csv import export_model_as_csv
 # Register your models here.
+
+export_model_as_csv.short_description = u'导出为csv文件'
 
 # __name__ 就是当前模块（interview) 当前运行的脚本的名字（admin）
 logger = logging.getLogger(__name__)
@@ -27,6 +29,7 @@ class CandidateAdmin(admin.ModelAdmin):
                     'second_result', 'second_interviewer',
                     'hr_level', 'hr_result',
                     'last_editor')
+    actions = [export_model_as_csv, ]
 
     fieldsets = (
         (None, {'fields': ("user_id", ("user_name", "city", "phone"), ("email", "apply_position", "born_address"), ("gender", "candidate_remark", "bachelor_school", "master_school", "doctor_school"), "major", "degree", "test_score_of_general_ability", "paper_score", "last_editor")}),
