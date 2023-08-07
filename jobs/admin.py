@@ -1,5 +1,6 @@
+from typing import Any
 from django.contrib import admin
-from jobs.models import Job
+from jobs.models import Job, Resume
 # Register your models here.
 class JobAdmin(admin.ModelAdmin):
     # 指定了在编辑（添加）页面哪些字段不需要展示
@@ -16,3 +17,24 @@ class JobAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 admin.site.register(Job, JobAdmin)
+
+class ResumeAdmin(admin.ModelAdmin):
+    list_display = ('username', 'applicant', 'city', 'apply_position', 'bachelor_school', 'master_school', 'doctor_school', 'major', 'created_date')
+
+    readonly_fields = ('applicant', 'created_date', 'modified_date')
+
+    # 是组标题的名字
+    fieldsets = [
+        (None, {'fields': (
+            'applicant', ('username', 'city', 'phone', ),
+            ('email', 'apply_position', 'born_address', 'gender', ),
+            ('bachelor_school', 'master_school', 'doctor_school', ),
+            ('major', 'degree'), ('created_date', 'modified_date', ),
+            'candidate_introduction', 'work_experience', 'project_experience', )})
+    ]
+    
+    def save_model(self, request: Any, obj: Any, form: Any, change: Any) -> None:
+        obj.applicant = request.user
+        return super().save_model(request, obj, form, change)
+
+admin.site.register(Resume, ResumeAdmin)

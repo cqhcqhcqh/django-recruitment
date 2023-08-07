@@ -25,7 +25,7 @@ def joblist(request):
 
     template = loader.get_template('joblist.html')
     context = {'job_list': job_list}
-    return HttpResponse(template.render(context))
+    return HttpResponse(template.render(context, request))
 
 def job(request, job_id):
     try:
