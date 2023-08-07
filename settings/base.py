@@ -186,7 +186,12 @@ LOGGING = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LDAP_AUTH_CONNECTION_USERNAME = None
+LDAP_AUTH_CONNECTION_PASSWORD = None
+
+LDAP_AUTH_URL = 'ldap://localhost:389'
+
 # 登录成功以后默认跳转的 URL
 LOGIN_REDIRECT_URL = '/'
 # 注册成功以后跳转的 URL
-SIMPLE_BACKEND_REDIRECT_URL = '/accounts/login/ '
+SIMPLE_BACKEND_REDIRECT_URL = '/accounts/login/'
