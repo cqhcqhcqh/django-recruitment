@@ -16,8 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from django.conf.urls import include
+from django.utils.translation import gettext as _
+import registration
 
 urlpatterns = [
     re_path(r"^", include("jobs.urls")),
     path('admin/', admin.site.urls),
+    re_path(r'^accounts/', include('registration.backends.simple.urls')),
 ]
+
+admin.register.site_header = _('versa科技招聘管理系统')

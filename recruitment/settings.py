@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jobs',
-    'interview'
+    'interview',
 ]
 
 MIDDLEWARE = [
@@ -184,3 +185,8 @@ LOGGING = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 登录成功以后默认跳转的 URL
+LOGIN_REDIRECT_URL = '/'
+# 注册成功以后跳转的 URL
+SIMPLE_BACKEND_REDIRECT_URL = '/accounts/login/ '
