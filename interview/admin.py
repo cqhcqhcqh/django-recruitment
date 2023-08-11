@@ -1,6 +1,7 @@
 from django.contrib import admin
 from interview.models import Candidate
 from interview.export_csv import export_model_as_csv
+from interview.notify_interviewer import notify_interviewer
 # Register your models here.
 
 export_model_as_csv.short_description = u'导出为csv文件'
@@ -23,7 +24,7 @@ class CandidateAdmin(admin.ModelAdmin):
                     'second_result', 'second_interviewer',
                     'hr_level', 'hr_result',
                     'last_editor')
-    actions = [export_model_as_csv, ]
+    actions = [export_model_as_csv, notify_interviewer, ]
 
     fieldsets = (
         (None, {'fields': ("user_id", ("user_name", "city", "phone"), ("email", "apply_position", "born_address"), ("gender", "candidate_remark", "bachelor_school", "master_school", "doctor_school"), "major", "degree", "test_score_of_general_ability", "paper_score", "last_editor")}),
