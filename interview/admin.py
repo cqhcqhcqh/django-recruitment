@@ -5,6 +5,7 @@ from interview.notify_interviewer import notify_interviewer
 # Register your models here.
 
 export_model_as_csv.short_description = u'导出为csv文件'
+notify_interviewer.short_description = u"通知一面面试官"
 
 class CandidateAdmin(admin.ModelAdmin):
     # 定义搜索字段

@@ -1,7 +1,5 @@
 from interview import dingtalk
 
-notify_interviewer.short_decription = u"通知一面面试官"
-
 # 通知一面面试官有面试通知
 def notify_interviewer(modeladmin, request, queryset):
     candidates = ""
